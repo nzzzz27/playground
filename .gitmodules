@@ -1,3 +1,6 @@
 [submodule "bootstrap"]
 	path = bootstrap
 	url = https://github.com/twbs/bootstrap.git
+[submodule "learning"]
+	path = learning
+	url = https://github.com/nzzzz27/learning.git
