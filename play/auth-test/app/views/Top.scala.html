@@ -1,0 +1,9 @@
+@import models.ViewValueTop
+
+@import helper._
+
+@(vv: ViewValueTop)(implicit request: RequestHeader, messagesProvider: MessagesProvider)
+
+@common.Main(vv) {
+  @vv.content
+}

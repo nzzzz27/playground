@@ -1,2 +1,11 @@
 .DS_Store
 .idea
+
+# play
+.metals
+metals.sbt
+.bloop
+.bsp
+project/project
+project/target
+target
