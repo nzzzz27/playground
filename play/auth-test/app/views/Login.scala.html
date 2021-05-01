@@ -1,0 +1,25 @@
+@import models.ViewValueLogin
+@import helper._
+
+@(vv: ViewValueLogin)(implicit request: RequestHeader, messages: MessagesProvider)
+
+@common.Main(vv) {
+  @form(action = routes.LoginController.login) {
+    @CSRF.formField
+    <fieldset>
+      @inputText(
+        vv.userForm("name"),
+        Symbol("_label") -> "名前"
+      )
+      @inputText(
+        vv.userForm("email"),
+        '_label -> "メールアドレス"
+      )
+      @inputPassword(
+        vv.userForm("password"),
+        '_label -> "パスワード"
+      )
+    </fieldset>
+    <button name="login" value="insert">ログイン</button>
+  }
+}

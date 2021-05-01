@@ -1,3 +1,6 @@
 GET     /                           controllers.TopController.show()
 
+GET     /login                      controllers.LoginController.show()
+POST    /login                      controllers.LoginController.login()
+
 GET /assets/*file                   controllers.Assets.versioned(path="/public", file: Asset)
