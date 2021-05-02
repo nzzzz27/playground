@@ -1,9 +1,9 @@
 package models
 
-import models.ViewValueSiteLayout
+import lib.model.User
 
-case class User(
+case class ViewValueUser(
+  id:       User.Id,
   name:     String,
   email:    String,
-  password: String
 )

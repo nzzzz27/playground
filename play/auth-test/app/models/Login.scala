@@ -3,8 +3,8 @@ package models
 import play.api.data._
 import play.api.data.Forms._
 
-import models.{ ViewValueSiteLayout, User }
+import models.{ ViewValueSiteLayout, ViewValueUser }
 
 case class ViewValueLogin(
-  userForm: Form[User],
+  userForm: Form[ViewValueUser],
 ) extends ViewValueSiteLayout

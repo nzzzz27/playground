@@ -13,11 +13,7 @@
       )
       @inputText(
         vv.userForm("email"),
-        '_label -> "メールアドレス"
-      )
-      @inputPassword(
-        vv.userForm("password"),
-        '_label -> "パスワード"
+        Symbol("_label") -> "メールアドレス"
       )
     </fieldset>
     <button name="login" value="insert">ログイン</button>
