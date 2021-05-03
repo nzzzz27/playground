@@ -16,9 +16,17 @@ class UserRepository @Inject()(
 )(implicit ec: ExecutionContext)
 extends HasDatabaseConfigProvider[JdbcProfile] {
 
+  private val query = table.query
+
   def getById(id: User.Id): Future[Option[User]] = {
     db.run {
-      table.query.filter(_.id === id).result.headOption
+      query.filter(_.id === id).result.headOption
+    }
+  }
+
+  def post(data: User): Future[User.Id] = {
+    db.run {
+      query returning query.map(_.id) += data
     }
   }
 

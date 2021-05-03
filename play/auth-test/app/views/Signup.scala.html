@@ -1,0 +1,29 @@
+@import models.ViewValueSignup
+@import helper._
+
+@(vv: ViewValueSignup)(implicit request: RequestHeader, messages: MessagesProvider)
+
+@common.Main(vv) {
+  @form(action = routes.SignupController.signup()) {
+    @CSRF.formField
+    <fieldset>
+      @inputText(
+        vv.form("lastName"),
+        Symbol("_label") -> "苗字"
+      )
+      @inputText(
+        vv.form("firstName"),
+        Symbol("_label") -> "名前"
+      )
+      @inputText(
+        vv.form("email"),
+        Symbol("_label") -> "メールアドレス"
+      )
+      @inputText(
+        vv.form("password"),
+        Symbol("_label") -> "パスワード"
+      )
+    </fieldset>
+    <button name="login" value="insert">Sign up</button>
+  }
+}

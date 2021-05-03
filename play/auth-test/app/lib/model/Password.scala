@@ -8,10 +8,18 @@ case class Password(
   id:         Id,
   userId:     User.Id,
   password:   String,
-  createdAt:  LocalDateTime,
-  updatedAt:  LocalDateTime
+  createdAt:  LocalDateTime = null,
+  updatedAt:  LocalDateTime = null
 )
 
 object Password {
   type Id = Option[Long]
+
+  def apply(userId: User.Id, password: String) = {
+    new Password(
+      id = None,
+      userId,
+      password,
+    )
+  }
 }

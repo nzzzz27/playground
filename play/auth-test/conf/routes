@@ -3,4 +3,7 @@ GET     /                           controllers.TopController.show()
 GET     /login                      controllers.LoginController.show()
 POST    /login                      controllers.LoginController.login()
 
+GET    /signup                      controllers.SignupController.index()
+POST   /signup                      controllers.SignupController.signup()
+
 GET /assets/*file                   controllers.Assets.versioned(path="/public", file: Asset)

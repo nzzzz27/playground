@@ -16,10 +16,17 @@ class PasswordRepository @Inject()(
 )(implicit ec: ExecutionContext)
 extends HasDatabaseConfigProvider[JdbcProfile] {
 
+  private val query = table.query
+
   def getById(id: Password.Id): Future[Option[Password]] = {
     db.run {
-      table.query.filter(_.id === id).result.headOption
+      query.filter(_.id === id).result.headOption
     }
   }
 
+  def post(data: Password): Future[Password.Id] = {
+    db.run {
+      query returning query.map(_.id) += data
+    }
+  }
 }

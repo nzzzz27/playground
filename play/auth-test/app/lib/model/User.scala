@@ -8,10 +8,19 @@ case class User(
   firstName:  String,
   lastName:   String,
   email:      String,
-  createdAt:  LocalDateTime,
-  updatedAt:  LocalDateTime
+  createdAt:  LocalDateTime = null,
+  updatedAt:  LocalDateTime = null
 )
 
 object User {
   type Id = Option[Long]
+
+  def apply(firstName: String, lastName: String, email: String) = {
+    new User(
+      id = None,
+      firstName,
+      lastName,
+      email,
+    )
+  }
 }
