@@ -8,8 +8,6 @@ case class UserAuthToken(
   id:         Id,
   userId:     User.Id,
   tolen:      String,
-  createdAt:  LocalDateTime,
-  updatedAt:  LocalDateTime
 )
 
 object UserAuthToken {

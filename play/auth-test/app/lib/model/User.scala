@@ -8,8 +8,6 @@ case class User(
   firstName:  String,
   lastName:   String,
   email:      String,
-  createdAt:  LocalDateTime = null,
-  updatedAt:  LocalDateTime = null
 )
 
 object User {

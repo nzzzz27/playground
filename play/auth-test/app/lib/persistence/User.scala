@@ -24,6 +24,13 @@ extends HasDatabaseConfigProvider[JdbcProfile] {
     }
   }
 
+  def getByData(user: User): Future[Option[User]] = {
+    db.run {
+      query.filter(u => (u.firstName === user.firstName) && (u.lastName === user.lastName) && (u.email === user.email))
+        .result.headOption
+    }
+  }
+
   def post(data: User): Future[User.Id] = {
     db.run {
       query returning query.map(_.id) += data

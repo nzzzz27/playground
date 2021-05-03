@@ -17,27 +17,23 @@ class PasswordTable @Inject()(
     Password.Id,
     User.Id,
     String,
-    LocalDateTime,
-    LocalDateTime,
   )
 
   protected class TableColumn(tag: Tag) extends Table[Password](tag, "Password") {
     def id         = column[Password.Id]  ("id", O.PrimaryKey, O.AutoInc)
-    def userId     = column[User.Id]      ("user_id")
+    def userId     = column[User.Id]  ("user_id")
     def password   = column[String]       ("password")
-    def createdAt  = column[LocalDateTime]("created_at")
-    def updatedAt  = column[LocalDateTime]("updated_at")
 
-    def userIdForeignKey = foreignKey("user_id", id, query)(_.id, onUpdate=ForeignKeyAction.Restrict, onDelete=ForeignKeyAction.Cascade)
+    def useraa = foreignKey("user_id", id, query)(_.id, onUpdate=ForeignKeyAction.Restrict, onDelete=ForeignKeyAction.Cascade)
 
-    def * = (id, userId, password, createdAt, updatedAt).<>(
+    def * = (id, userId, password).<>(
       // Tuple(table) => Model
       (t: TableElementTuple) => Password(
-        t._1, t._2, t._3, t._4, t._5
+        t._1, t._2, t._3
       ),
       // Model => Tuple(table)
       (v: Password) => Password.unapply(v).map { t => (
-        t._1, t._2, t._3, t._4, t._5
+        t._1, t._2, t._3
       )}
     )
   }

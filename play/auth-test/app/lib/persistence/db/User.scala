@@ -1,8 +1,6 @@
 package lib.persistence.db
 
 import javax.inject.Inject
-import java.time.LocalDateTime
-import java.sql.Timestamp
 import play.api.db.slick.{ DatabaseConfigProvider, HasDatabaseConfigProvider }
 import slick.jdbc.JdbcProfile
 
@@ -18,8 +16,6 @@ class UserTable @Inject()(
     String,
     String,
     String,
-    LocalDateTime,
-    LocalDateTime,
   )
 
   protected class TableColumn(tag: Tag) extends Table[User](tag, "User") {
@@ -27,17 +23,15 @@ class UserTable @Inject()(
     def firstName  = column[String]       ("first_name")
     def lastName   = column[String]       ("last_name")
     def email      = column[String]       ("email")
-    def createdAt  = column[LocalDateTime]("created_at")
-    def updatedAt  = column[LocalDateTime]("updated_at")
 
-    def * = (id, firstName, lastName, email, createdAt, updatedAt).<>(
+    def * = (id, firstName, lastName, email).<>(
       // Tuple(table) => Model
       (t: TableElementTuple) => User(
-        t._1, t._2, t._3, t._4, t._5, t._6
+        t._1, t._2, t._3, t._4
       ),
       // Model => Tuple(table)
       (v: User) => User.unapply(v).map { t => (
-        t._1, t._2, t._3, t._4, t._5, t._6
+        t._1, t._2, t._3, t._4
       )}
     )
   }

@@ -8,7 +8,7 @@ import slick.jdbc.MySQLProfile.api._
 import slick.jdbc.JdbcProfile
 
 import lib.persistence.db.PasswordTable
-import lib.model.Password
+import lib.model.{ Password, User }
 
 class PasswordRepository @Inject()(
   protected val dbConfigProvider: DatabaseConfigProvider,
@@ -21,6 +21,15 @@ extends HasDatabaseConfigProvider[JdbcProfile] {
   def getById(id: Password.Id): Future[Option[Password]] = {
     db.run {
       query.filter(_.id === id).result.headOption
+    }
+  }
+
+  def getByUserId(userOpt: Option[User]): Future[Option[Password]] = {
+    userOpt match {
+      case Some(user) => db.run {
+        query.filter(_.userId === user.id).result.headOption
+      }
+      case None => Future.successful(None)
     }
   }
 

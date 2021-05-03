@@ -1,10 +1,10 @@
+@import models.ViewValueSignin
 @import helper._
-@import models.ViewValueSignup
 
-@(vv: ViewValueSignup)(implicit request: RequestHeader, messages: MessagesProvider)
+@(vv: ViewValueSignin)(implicit request: RequestHeader, messages: MessagesProvider)
 
 @common.Main(vv) {
-  @helper.form(action = routes.SignupController.signup()) {
+  @helper.form(action = routes.SigninController.signin) {
     @CSRF.formField
     <fieldset>
       @inputText(
@@ -24,6 +24,6 @@
         Symbol("_label") -> "パスワード"
       )
     </fieldset>
-    <button name="login" value="insert">Sign up</button>
+    <button name="login" value="insert">Sign in</button>
   }
 }

@@ -1,7 +1,7 @@
 GET     /                           controllers.TopController.show()
 
-GET     /login                      controllers.LoginController.show()
-POST    /login                      controllers.LoginController.login()
+GET     /signin                      controllers.SigninController.index()
+POST    /signin                      controllers.SigninController.signin()
 
 GET    /signup                      controllers.SignupController.index()
 POST   /signup                      controllers.SignupController.signup()

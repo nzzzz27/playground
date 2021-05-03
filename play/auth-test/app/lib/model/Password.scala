@@ -8,8 +8,6 @@ case class Password(
   id:         Id,
   userId:     User.Id,
   password:   String,
-  createdAt:  LocalDateTime = null,
-  updatedAt:  LocalDateTime = null
 )
 
 object Password {
