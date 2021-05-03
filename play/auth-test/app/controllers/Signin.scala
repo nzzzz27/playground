@@ -5,7 +5,7 @@ import play.api.i18n.I18nSupport
 import play.api.mvc.{ ControllerComponents, AbstractController }
 import scala.concurrent.{ Future, ExecutionContext }
 
-import models.{ ViewValueSignin, ViewValueUser, ViewValuePassword }
+import models.{ ViewValueSignin }
 import models.form.FormSignin
 
 import lib.model.User
@@ -53,9 +53,9 @@ extends AbstractController(cc) with I18nSupport {
             }
             case _          => {
               val vv = ViewValueSignin(
-                form = form
+                form = form,
+                errorMessage = "何かが一致しません"
               )
-              println("not match")
               BadRequest(views.html.Signin(vv))
             }
           }

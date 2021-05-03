@@ -4,6 +4,9 @@
 @(vv: ViewValueSignin)(implicit request: RequestHeader, messages: MessagesProvider)
 
 @common.Main(vv) {
+  @if(vv.errorMessage.nonEmpty) {
+    <p>@vv.errorMessage</p>
+  }
   @helper.form(action = routes.SigninController.signin) {
     @CSRF.formField
     <fieldset>

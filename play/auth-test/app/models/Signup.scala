@@ -6,5 +6,6 @@ import play.api.data.Form
 import models.{ ViewValueSiteLayout, FormSignup }
 
 case class ViewValueSignup(
-  form:  Form[FormSignup]
+  form:          Form[FormSignup],
+  errorMessage:  String = "",
 ) extends ViewValueSiteLayout

@@ -58,9 +58,9 @@ extends AbstractController(cc) with I18nSupport {
             }
             case _            => {
               val vv = ViewValueSignup(
-                form = form
+                form = form,
+                errorMessage = "失敗しました"
               )
-              println("fail")
               BadRequest(views.html.Signup(vv))
             }
           }
