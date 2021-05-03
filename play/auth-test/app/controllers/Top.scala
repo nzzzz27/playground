@@ -15,7 +15,8 @@ class TopController @Inject() (
   def show() = Action { implicit req =>
 
     val vv = ViewValueTop(
-      content = "Welcome to Top Page"
+      content = "Welcome to Top Page",
+      session = req.session.get("connected").getOrElse("")
     )
 
     Ok(views.html.Top(vv))
