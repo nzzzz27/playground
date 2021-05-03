@@ -7,18 +7,26 @@ import play.api.db.slick.{ DatabaseConfigProvider, HasDatabaseConfigProvider }
 import slick.jdbc.MySQLProfile.api._
 import slick.jdbc.JdbcProfile
 
-import lib.persistence.db.UserAuthTokenTable
-import lib.model.UserAuthToken
+import lib.persistence.db.AuthTokenTable
+import lib.model.AuthToken
 
-class UserAuthTokenRepository @Inject()(
+class AuthTokenRepository @Inject()(
   protected val dbConfigProvider: DatabaseConfigProvider,
-  table:                          UserAuthTokenTable
+  table:                          AuthTokenTable
 )(implicit ec: ExecutionContext)
 extends HasDatabaseConfigProvider[JdbcProfile] {
 
-  def getById(id: UserAuthToken.Id): Future[Option[UserAuthToken]] = {
+  private val query = table.query
+
+  def getById(id: AuthToken.Id): Future[Option[AuthToken]] = {
     db.run {
-      table.query.filter(_.id === id).result.headOption
+      query.filter(_.id === id).result.headOption
+    }
+  }
+
+  def post(data: AuthToken): Future[AuthToken.Id] = {
+    db.run {
+      query returning query.map(_.id) += data
     }
   }
 

@@ -1,15 +1,23 @@
 package lib.model
 
-import java.time.LocalDateTime
+import play.api.mvc.Session
 import lib.model.User
 
-import UserAuthToken._
-case class UserAuthToken(
+import AuthToken._
+case class AuthToken(
   id:         Id,
   userId:     User.Id,
-  tolen:      String,
+  token:      String,
 )
 
-object UserAuthToken {
+object AuthToken {
   type Id = Option[Long]
+
+  def apply(userId: User.Id, token: String) = {
+    new AuthToken(
+      id = None,
+      userId,
+      token,
+    )
+  }
 }
