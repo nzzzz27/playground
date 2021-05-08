@@ -1,8 +1,9 @@
 package controllers
 
 import javax.inject._
+import java.util.UUID
 import play.api.i18n.I18nSupport
-import play.api.mvc.{ ControllerComponents, AbstractController }
+import play.api.mvc.{ Cookie, ControllerComponents, AbstractController }
 import scala.concurrent.{ Future, ExecutionContext }
 
 import models.{ ViewValueSignin }
@@ -26,7 +27,6 @@ extends AbstractController(cc) with I18nSupport {
     val vv = ViewValueSignin(
       form = form
     )
-    println(req.session)
     Ok(views.html.Signin(vv))
   }
 
@@ -49,16 +49,14 @@ extends AbstractController(cc) with I18nSupport {
           passwordOpt    <- passwordRepository.getByUserId(userOpt)
           // authToken = AuthToken(
           //   userId = userOpt.map(_.id).get,
-          //   token  = req.session.toString
+          //   token  = token
           // )
           // _              <- authTokenRepository.post(authToken)
         } yield {
           (userOpt.isDefined, passwordOpt.isDefined) match {
             case (true, true) => {
-              println{
-                Redirect(routes.TopController.show()).withSession(req.session + ("connected" -> "testtest"))
-              }
-              Redirect(routes.TopController.show()).withSession(req.session + ("connected" -> "testtest"))
+              val token    = UUID.randomUUID()
+              Redirect(routes.TopController.show()).withSession(req.session + ("login_id" -> token.toString()))
             }
             case _          => {
               val vv = ViewValueSignin(
@@ -74,7 +72,7 @@ extends AbstractController(cc) with I18nSupport {
   }
 
   def getSession() = Action { implicit req =>
-     req.session.get("connected").map { data =>
+     req.session.get("user_id").map { data =>
          Ok("save session page access time:" + data)
      }.getOrElse {
          Ok("you have never access in save session page.")

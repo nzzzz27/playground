@@ -1,15 +1,16 @@
 package models.form
 
 import java.time.LocalDateTime
+import java.util.UUID
 
 case class FormSignin(
   firstName:  String,
   lastName:   String,
   email:      String,
   password:   String,
-  token:      Option[String],
+  token:      Option[UUID],
 ) {
-  def create(firstName: String, lastName: String, email: String, password: String, token: Option[String]): FormSignin = {
+  def create(firstName: String, lastName: String, email: String, password: String, token: Option[UUID]): FormSignin = {
     new FormSignin(
       firstName,
       lastName,
@@ -30,7 +31,7 @@ object FormSignin {
       "lastName"     -> nonEmptyText,
       "email"        -> email,
       "password"     -> nonEmptyText,
-      "token"        -> optional(text),
+      "token"        -> optional(uuid),
     )(FormSignin.apply)(FormSignin.unapply)
   )
 }

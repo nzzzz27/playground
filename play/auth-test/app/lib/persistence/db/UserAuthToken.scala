@@ -1,6 +1,7 @@
 package lib.persistence.db
 
 import javax.inject.Inject
+import java.util.UUID
 import play.api.db.slick.{ DatabaseConfigProvider, HasDatabaseConfigProvider }
 import slick.jdbc.JdbcProfile
 import play.api.mvc.Session

@@ -1,5 +1,6 @@
 package lib.model
 
+import java.util.UUID
 import play.api.mvc.Session
 import lib.model.User
 
@@ -13,11 +14,11 @@ case class AuthToken(
 object AuthToken {
   type Id = Option[Long]
 
-  def apply(userId: User.Id, token: String) = {
+  def apply(userId: User.Id, token: UUID) = {
     new AuthToken(
       id = None,
       userId,
-      token,
+      token.toString(),
     )
   }
 }
