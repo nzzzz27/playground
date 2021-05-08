@@ -20,11 +20,12 @@ class AuthenticatedAction @Inject()(
   ): Future[Result] = {
     request.session.get("login_id") match {
       case Some(username) => {
+        // request    -> GET /
+        // messageApi -> play.api.i18n.DefaultMessagesApi@762354b4
         block(new MessagesRequest(request, messagesApi))
       }
       case None => {
-        println("nooo");
-        Future(Unauthorized)
+        Future(Redirect(routes.SigninController.index()))
       }
     }
   }
