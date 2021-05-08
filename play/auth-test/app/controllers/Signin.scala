@@ -47,6 +47,7 @@ extends AbstractController(cc) with I18nSupport {
         for {
           userOpt        <- userRepository.getByData(user)
           passwordOpt    <- passwordRepository.getByUserId(userOpt)
+          // tokenをDBに保存する時はこれを調整する
           // authToken = AuthToken(
           //   userId = userOpt.map(_.id).get,
           //   token  = token
@@ -72,10 +73,10 @@ extends AbstractController(cc) with I18nSupport {
   }
 
   def getSession() = Action { implicit req =>
-     req.session.get("user_id").map { data =>
-         Ok("save session page access time:" + data)
+     req.session.get("login_id").map { data =>
+         Ok("login_id のセッション値: " + data)
      }.getOrElse {
-         Ok("you have never access in save session page.")
+         Ok("login_id のセッション値はありません")
      }
   }
 }

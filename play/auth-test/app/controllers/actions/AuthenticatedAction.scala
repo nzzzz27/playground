@@ -20,6 +20,7 @@ class AuthenticatedAction @Inject()(
   ): Future[Result] = {
     request.session.get("login_id") match {
       case Some(username) => {
+        // @INFO
         // request    -> GET /
         // messageApi -> play.api.i18n.DefaultMessagesApi@762354b4
         block(new MessagesRequest(request, messagesApi))
