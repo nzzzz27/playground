@@ -7,15 +7,24 @@ import {SpinnerService} from './spinner.service';
 @Injectable()
 export class SpinnerInterceptor implements HttpInterceptor {
 
+  defaultTimeout: number
+
+  started = Date.now()
+
   constructor(
     public spinnerService: SpinnerService
   ) { }
 
   intercept(
-    req: HttpRequest<any>,
+    req:  HttpRequest<any>,
     next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    this.spinnerService.show();
+  ): Observable<HttpEvent<boolean>> {
+
+    const elapsed = Date.now() - this.started
+
+    if(elapsed >= 1000) {
+      this.spinnerService.show()
+    }
     return next.handle(req).pipe(finalize(() => this.spinnerService.hide()))
   }
 }
