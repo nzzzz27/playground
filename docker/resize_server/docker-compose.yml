@@ -1,0 +1,16 @@
+#version: "3"
+#
+#services:
+#  nginx:
+#    build: .
+#    container_name: resize_nginx
+#    volumes:
+#      - type:   bind
+#        source: ./templates/nginx.conf
+#        target: /etc/nginx/nginx.conf
+#      - type:   bind
+#        source: ./html
+#        target: /usr/share/nginx/html
+#    ports:
+#        - 8000:80
+#    tty: true
