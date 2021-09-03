@@ -1,7 +1,5 @@
 FROM alpine:3.1
 
-RUN echo "now building..."
-
 RUN apk --update add \
     wget \
     tar \
@@ -39,7 +37,7 @@ RUN cd nginx-1.20.1 \
     && make \
     && make install
 
-COPY ./templates/nginx.conf /etc/nginx/nginx.conf
+COPY ./nginx.conf /etc/nginx/nginx.conf
 COPY ./html /usr/share/nginx/html
 
 EXPOSE 8000 80
