@@ -1,7 +1,18 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <h1>Hello sample page !!</h1>
-    <img src="https://s3.ap-northeast-1.amazonaws.com/nzzzz27.public-bucket/images/0001/hamstar.jpg">
+    <div class="box">
+      <p>original</p>
+      <img width="300px" height="auto" src="https://s3.ap-northeast-1.amazonaws.com/nzzzz27.public-bucket/images/0001/cat.jpg">
+    </div>
+    <div class="box">
+      <p>dw=300,dh=300 only</p>
+      <img src="http://localhost/small_light(dw=300,dh=300,progressive=y)/images/0001/cat.jpg">
+    </div>
   </body>
+  <style>
+    .box {
+      display: inline-block;
+    }
+  </style>
 </html>

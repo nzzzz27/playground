@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>small_lightサンプル2</title>
+</head>
+<body>
+  <p>パラメータをカンマ区切りで入力し「変更」を押してください。</p>
+  <p><a target="_blank" href="https://github.com/cubicdaiya/ngx_small_light#parameters-for-small_light-function">パラメータ一覧はこちら</a></p>
+  <div>
+    <input id="textbox" type="text" placeholder="dw=300,of=webp">
+    <input type="button" onclick="update()" value="変更">
+  </div>
+  <img id="image" src="http://localhost/small_light(dw=300)/images/0001/cat.jpg">
+  <div>
+    <p>progressive=y</p>
+    <img src="http://localhost/small_light(dw=300,progressive=y)/images/0001/cat.jpg">
+    <p>jpeghint=y</p>
+    <img src="http://localhost/small_light(dw=300,jpeghint=y)/images/0001/cat.jpg">
+  </div>
+  <script defer>
+    update = () => {
+      // srcの値を取得
+      const target    = document.getElementById('image')
+      const targetSrc = target.getAttribute('src')
+
+      // 現在のsettingを取得
+      const index1  = targetSrc.indexOf('(') + 1
+      const index2  = targetSrc.indexOf(')')
+      const setting = targetSrc.slice(index1, index2)
+
+      // textboxの入力値を取得
+      const input      = document.getElementById('textbox').value
+      const newSetting = input === '' ? 'dw=300' : input
+      const newUrl     = targetSrc.replace(setting, newSetting)
+
+      target.setAttribute('src', newUrl)
+    }
+  </script>
+  <style>
+    input {
+      margin-bottom: 5px;
+    }
+    input[type='text'] {
+      height: 20px;
+    }
+    #textbox {
+      width: 500px;
+    }
+  </style>
+</body>
+</html>
